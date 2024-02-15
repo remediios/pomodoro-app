@@ -1,7 +1,7 @@
 :root {
-  --main-color-short-rest: #98f5ff;
-  --main-color-long-rest: #98c3ff;
-  --main-color-working: #ffa074;
+  --main-color-short-rest: #98e0ff;
+  --main-color-long-rest: #98b5ff;
+  --main-color-working: #ff8074;
 }
 
 * {
@@ -24,7 +24,7 @@ body {
 }
 
 .working {
-  background: #ffa074;
+  background: var(--main-color-working);
 }
 
 .hidden {
