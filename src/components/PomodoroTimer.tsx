@@ -10,18 +10,18 @@ const audioStartWorking = new Audio(bellStart);
 const audioFinishWorking = new Audio(bellFinish);
 
 interface Props {
-  defaultPomodoroTime: number;
+  pomodoroTime: number;
   shortRestTime: number;
   longRestTime: number;
   cycles: number;
 }
 function PomodoroTimer({
-  defaultPomodoroTime,
+  pomodoroTime,
   shortRestTime,
   longRestTime,
   ...props
 }: Props): JSX.Element {
-  const [mainTime, setMainTime] = useState(defaultPomodoroTime);
+  const [mainTime, setMainTime] = useState(pomodoroTime);
   const [timeCounting, setTimeCounting] = useState(false);
 
   const [working, setWorking] = useState(false);
@@ -42,15 +42,16 @@ function PomodoroTimer({
   );
 
   const handleWorkConfig = () => {
-    setMainTime(defaultPomodoroTime);
     setTimeCounting(true);
     setWorking(true);
     setResting(false);
+    setMainTime(pomodoroTime);
     audioStartWorking.play();
   };
 
   const handleRestConfig = (long: boolean) => {
     setTimeCounting(true);
+    setWorking(false);
     setResting(true);
     if (long) {
       setMainTime(longRestTime);
