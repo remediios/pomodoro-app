@@ -24,19 +24,26 @@ function PomodoroTimer({
   const [mainTime, setMainTime] = useState(pomodoroTime);
   const [timeCounting, setTimeCounting] = useState(false);
 
+  const [mode, setMode] = useState('resting');
   const [working, setWorking] = useState(false);
   const [resting, setResting] = useState(false);
   const [cyclesQtdManager, setCyclesQtdManager] = useState(
     new Array(props.cycles - 1).fill(true),
   );
-  const [completedCycles, setCompletedCycles] = useState(0);
-  const [fullWorkingTime, setFullWorkingTime] = useState(0);
-  const [numberOfPomodoros, setNumberOfPomodoros] = useState(0);
+  const [pomodoroDetails, setPomodoroDetails] = useState({
+    completedCycles: 0,
+    fullWorkingTime: 0,
+    numberOfPomodoros: 0,
+  });
 
   useInterval(
     () => {
       setMainTime(mainTime - 1);
-      if (working) setFullWorkingTime(fullWorkingTime + 1);
+      if (working)
+        setPomodoroDetails({
+          ...pomodoroDetails,
+          fullWorkingTime: pomodoroDetails.fullWorkingTime + 1,
+        });
     },
     timeCounting ? 1000 : null,
   );
@@ -63,7 +70,9 @@ function PomodoroTimer({
 
   useEffect(() => {
     if (working) document.body.classList.add('working');
-    if (resting) document.body.classList.remove('working');
+    if (resting) {
+      document.body.classList.remove('working');
+    }
 
     if (mainTime > 0) return;
 
@@ -73,18 +82,24 @@ function PomodoroTimer({
     } else if (working && cyclesQtdManager.length <= 0) {
       handleRestConfig(true);
       setCyclesQtdManager(new Array(props.cycles - 1).fill(true));
-      setCompletedCycles(completedCycles + 1);
+      setPomodoroDetails({
+        ...pomodoroDetails,
+        completedCycles: pomodoroDetails.completedCycles + 1,
+      });
     }
 
-    if (working) setNumberOfPomodoros(numberOfPomodoros + 1);
+    if (working)
+      setPomodoroDetails({
+        ...pomodoroDetails,
+        numberOfPomodoros: pomodoroDetails.numberOfPomodoros + 1,
+      });
     if (resting) handleWorkConfig();
   }, [
     working,
     resting,
     mainTime,
     cyclesQtdManager,
-    numberOfPomodoros,
-    completedCycles,
+    pomodoroDetails,
     handleRestConfig,
     setCyclesQtdManager,
     handleWorkConfig,
@@ -105,9 +120,9 @@ function PomodoroTimer({
         <Button text="Rest" onClick={() => handleRestConfig(false)} />
       </div>
       <div className="details">
-        <p>Cycles: {completedCycles}</p>
-        <p>Working Time: {secondsToTime(fullWorkingTime)}</p>
-        <p>Pomodoros: {numberOfPomodoros}</p>
+        <p>Cycles: {pomodoroDetails.completedCycles}</p>
+        <p>Working Time: {secondsToTime(pomodoroDetails.fullWorkingTime)}</p>
+        <p>Pomodoros: {pomodoroDetails.numberOfPomodoros}</p>
       </div>
     </div>
   );
