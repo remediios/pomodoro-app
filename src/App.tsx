@@ -1,14 +1,16 @@
 import React from 'react';
 import PomodoroTimer from './components/PomodoroTimer';
+import { usePomodoroContext } from './contexts/PomodoroContext';
 
 function App(): JSX.Element {
+  const { pOptions } = usePomodoroContext();
   return (
     <div className="container">
       <PomodoroTimer
-        pomodoroTime={1500}
-        shortRestTime={300}
-        longRestTime={900}
-        cycles={4}
+        pomodoroTime={pOptions.pomodoroTime}
+        shortRestTime={pOptions.shortRestTime}
+        longRestTime={pOptions.longRestTime}
+        cycles={pOptions.cycles}
       />
     </div>
   );

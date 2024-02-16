@@ -5,6 +5,7 @@ import Timer from './Timer';
 import bellStart from '../sounds/bell-start.mp3';
 import bellFinish from '../sounds/bell-finish.mp3';
 import PomodoroDetails from './PomodoroDetails';
+import PomodoroHeader from './PomodoroHeader';
 
 const audioStartWorking = new Audio(bellStart);
 const audioFinishWorking = new Audio(bellFinish);
@@ -27,14 +28,6 @@ function PomodoroTimer({
   const [working, setWorking] = useState(false);
   const [resting, setResting] = useState(false);
   const [restingMode, setRestingMode] = useState('');
-
-  const modeLabel = working
-    ? 'WORKING'
-    : restingMode === 'short-rest'
-    ? 'SHORT REST'
-    : restingMode === 'long-rest'
-    ? 'LONG REST'
-    : 'TIME TO FOCUS!';
 
   const [cyclesQtdManager, setCyclesQtdManager] = useState(
     new Array(props.cycles - 1).fill(true),
@@ -103,7 +96,7 @@ function PomodoroTimer({
 
   return (
     <div className="pomodoro">
-      <h2>{modeLabel}</h2>
+      <PomodoroHeader working={working} restingMode={restingMode} />
       <Timer time={mainTime} />
       <div className="controls">
         <Button text="Work" onClick={handleWorkConfig} />
