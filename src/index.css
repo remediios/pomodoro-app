@@ -39,7 +39,7 @@ body {
   background: #fff;
   margin: 50px 20px;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -73,6 +73,11 @@ body {
 
 .working .pomodoro button {
   background: var(--main-color-working);
+  color: #fff;
+}
+
+.restingLong .pomodoro button {
+  background: var(--main-color-long-rest);
   color: #fff;
 }
 
