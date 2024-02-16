@@ -2,6 +2,7 @@
   --main-color-short-rest: #98e0ff;
   --main-color-long-rest: #98b5ff;
   --main-color-working: #ff8074;
+  --main-color-default: #2e2e2e;
 }
 
 * {
@@ -13,7 +14,7 @@
 
 body {
   font-family: sans-serif;
-  background: var(--main-color-short-rest);
+  background: var(--main-color-default);
   transition: background-color 300ms ease-in-out;
   line-height: 1.5;
 }
@@ -25,6 +26,10 @@ body {
 
 .working {
   background: var(--main-color-working);
+}
+
+.restingShort {
+  background: var(--main-color-short-rest);
 }
 
 .restingLong {
@@ -61,12 +66,12 @@ body {
 }
 
 .pomodoro button {
-  background: var(--main-color-short-rest);
+  background: var(--main-color-default);
   border: none;
   cursor: pointer;
   border-radius: 4px;
   padding: 10px 20px;
-  color: #000;
+  color: #fff;
   transition: background-color 300ms ease-in-out;
   margin: 20px auto;
 }
@@ -81,14 +86,26 @@ body {
   color: #fff;
 }
 
+.restingShort .pomodoro button {
+  background: var(--main-color-short-rest);
+  color: #fff;
+}
+
 .pomodoro .details {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 0;
+  margin: 30px 0 20px 35px;
 }
 
 .pomodoro .details p {
-  margin: 0 10px;
+  margin: 0 20px;
   font-weight: 100;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.details-label {
+  font-weight: 600;
+  text-align: center;
 }

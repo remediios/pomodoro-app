@@ -4,7 +4,7 @@ import Button from './Button';
 import Timer from './Timer';
 import bellStart from '../sounds/bell-start.mp3';
 import bellFinish from '../sounds/bell-finish.mp3';
-import { secondsToTime } from '../utils/secondsToTime';
+import PomodoroDetails from './PomodoroDetails';
 
 const audioStartWorking = new Audio(bellStart);
 const audioFinishWorking = new Audio(bellFinish);
@@ -26,7 +26,16 @@ function PomodoroTimer({
 
   const [working, setWorking] = useState(false);
   const [resting, setResting] = useState(false);
-  const [restingMode, setRestingMode] = useState('short-rest');
+  const [restingMode, setRestingMode] = useState('');
+
+  const modeLabel = working
+    ? 'WORKING'
+    : restingMode === 'short-rest'
+    ? 'SHORT REST'
+    : restingMode === 'long-rest'
+    ? 'LONG REST'
+    : 'TIME TO FOCUS';
+
   const [cyclesQtdManager, setCyclesQtdManager] = useState(
     new Array(props.cycles - 1).fill(true),
   );
@@ -68,10 +77,13 @@ function PomodoroTimer({
   useEffect(() => {
     if (working) {
       document.body.classList.remove('restingLong');
+      document.body.classList.remove('restingShort');
       document.body.classList.add('working');
     }
     if (resting) {
       document.body.classList.remove('working');
+      if (restingMode === 'short-rest')
+        document.body.classList.add('restingShort');
     }
 
     if (mainTime > 0) return;
@@ -91,14 +103,7 @@ function PomodoroTimer({
 
   return (
     <div className="pomodoro">
-      <h2>
-        {working
-          ? 'WORKING'
-          : restingMode === 'short-rest'
-          ? 'SHORT REST'
-          : 'LONG REST'}{' '}
-        MODE
-      </h2>
+      <h2>{modeLabel}</h2>
       <Timer time={mainTime} />
       <div className="controls">
         <Button text="Work" onClick={handleWorkConfig} />
@@ -109,11 +114,11 @@ function PomodoroTimer({
         />
         <Button text="Rest" onClick={() => handleRestConfig(false)} />
       </div>
-      <div className="details">
-        <p>Cycles: {completedCycles}</p>
-        <p>Working Time: {secondsToTime(fullWorkingTime)}</p>
-        <p>Pomodoros: {numberOfPomodoros}</p>
-      </div>
+      <PomodoroDetails
+        completedCycles={completedCycles}
+        fullWorkingTime={fullWorkingTime}
+        numberOfPomodoros={numberOfPomodoros}
+      />
     </div>
   );
 }
