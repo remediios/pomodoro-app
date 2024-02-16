@@ -34,7 +34,7 @@ function PomodoroTimer({
     ? 'SHORT REST'
     : restingMode === 'long-rest'
     ? 'LONG REST'
-    : 'TIME TO FOCUS';
+    : 'TIME TO FOCUS!';
 
   const [cyclesQtdManager, setCyclesQtdManager] = useState(
     new Array(props.cycles - 1).fill(true),
