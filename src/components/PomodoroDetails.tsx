@@ -10,7 +10,7 @@ function PomodoroDetails({
   completedCycles,
   fullWorkingTime,
   numberOfPomodoros,
-}: Props) {
+}: Props): JSX.Element {
   return (
     <div className="details">
       <p>

@@ -16,6 +16,7 @@ interface Props {
   longRestTime: number;
   cycles: number;
 }
+
 function PomodoroTimer({
   pomodoroTime,
   shortRestTime,

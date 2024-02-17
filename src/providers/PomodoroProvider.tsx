@@ -10,11 +10,6 @@ interface PomodoroProvider {
 }
 
 const PomodoroProvider: React.FC<PomodoroProvider> = ({ children }) => {
-  localStorage.setItem(
-    'pomodoroOptions',
-    JSON.stringify(defaultPomodoroOptions),
-  );
-
   const storedData: PomodoroOptions | null = JSON.parse(
     localStorage.getItem('pomodoroOptions') ?? 'null',
   );

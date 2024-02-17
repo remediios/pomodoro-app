@@ -20,7 +20,7 @@ interface Props {
 }
 
 function SettingsControls({ options, setOptions }: Props): JSX.Element {
-  const { pOptions, setPOptions } = usePomodoroContext();
+  const { pOptions } = usePomodoroContext();
 
   const [pomodoroTime, setPomodoroTime] = useState(pOptions.pomodoroTime);
   const [shortRestTime, setShortRestTime] = useState(pOptions.shortRestTime);
@@ -28,23 +28,18 @@ function SettingsControls({ options, setOptions }: Props): JSX.Element {
   const [cycles, setCycles] = useState(pOptions.cycles);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.name);
     switch (e.target.name) {
       case 'pomodoroTime':
-        // setPomodoroTime(Number(e.target.value));
-        setPOptions({ ...pOptions, pomodoroTime: Number(e.target.value) });
+        setPomodoroTime(Number(e.target.value));
         break;
       case 'shortRestTime':
-        // setShortRestTime(Number(e.target.value));
-        setPOptions({ ...pOptions, shortRestTime: Number(e.target.value) });
+        setShortRestTime(Number(e.target.value));
         break;
       case 'longRestTime':
-        // setLongRestTime(Number(e.target.value));
-        setPOptions({ ...pOptions, longRestTime: Number(e.target.value) });
+        setLongRestTime(Number(e.target.value));
         break;
       case 'cycles':
-        // setCycles(Number(e.target.value));
-        setPOptions({ ...pOptions, cycles: Number(e.target.value) });
+        setCycles(Number(e.target.value));
         break;
       default:
         break;
@@ -52,8 +47,12 @@ function SettingsControls({ options, setOptions }: Props): JSX.Element {
   };
 
   useEffect(() => {
-    if (pOptions.cycles < 0) return;
-    console.log(pOptions);
+    setOptions({
+      pomodoroTime,
+      shortRestTime,
+      longRestTime,
+      cycles,
+    });
   }, [pomodoroTime, shortRestTime, longRestTime, cycles]);
 
   return (
@@ -64,7 +63,7 @@ function SettingsControls({ options, setOptions }: Props): JSX.Element {
           className="settings-control-unit"
           placeholder="Default Time"
           name="pomodoroTime"
-          value={pOptions.pomodoroTime}
+          value={options.pomodoroTime}
           onChange={(e) => handleInputChange(e)}
         />
       </div>
@@ -74,7 +73,7 @@ function SettingsControls({ options, setOptions }: Props): JSX.Element {
           className="settings-control-unit"
           placeholder="Short Rest Time"
           name="shortRestTime"
-          value={pOptions.shortRestTime}
+          value={options.shortRestTime}
           onChange={(e) => handleInputChange(e)}
         />
       </div>
@@ -84,7 +83,7 @@ function SettingsControls({ options, setOptions }: Props): JSX.Element {
           className="settings-control-unit"
           placeholder="Long Rest Time"
           name="longRestTime"
-          value={pOptions.longRestTime}
+          value={options.longRestTime}
           onChange={(e) => handleInputChange(e)}
         />
       </div>
@@ -94,7 +93,7 @@ function SettingsControls({ options, setOptions }: Props): JSX.Element {
           className="settings-control-unit"
           placeholder="Cycles"
           name="cycles"
-          value={pOptions.cycles}
+          value={options.cycles}
           onChange={(e) => handleInputChange(e)}
         />
       </div>

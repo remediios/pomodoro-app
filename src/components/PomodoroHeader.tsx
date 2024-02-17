@@ -30,7 +30,6 @@ function PomodoroHeader({ working, restingMode }: Props): JSX.Element {
   const handleOk = () => {
     setIsModalOpen(false);
     setPOptions(options);
-    console.log(options);
   };
 
   const handleCancel = () => {
@@ -38,8 +37,8 @@ function PomodoroHeader({ working, restingMode }: Props): JSX.Element {
   };
 
   useEffect(() => {
-    console.log('OPTIONS CHANGED', options);
-  }, [options]);
+    localStorage.setItem('pomodoroOptions', JSON.stringify(pOptions));
+  }, [pOptions]);
 
   return (
     <div>
