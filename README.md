@@ -8,6 +8,8 @@ This is a Pomodoro Timer application built with React, designed to help users ma
     <img src="https://github.com/remediios/pomodoro-app/blob/main/media/giphy.gif" alt="Pomodoro Timer GIF" width="800" />
 </div>
 
+#### Live Software Demo (https://pomodortimero.netlify.app/)
+
 ## Features
 
 - **Pomodoro Timer:** Set the duration for your focused work sessions.
