@@ -1,17 +1,27 @@
 import React, { ReactNode, useState } from 'react';
 import PomodoroContext from '../contexts/PomodoroContext';
+import {
+  PomodoroOptions,
+  defaultPomodoroOptions,
+} from '../utils/pomodoroOptions';
 
 interface PomodoroProvider {
   children: ReactNode;
 }
 
 const PomodoroProvider: React.FC<PomodoroProvider> = ({ children }) => {
-  const [pOptions, setPOptions] = useState({
-    pomodoroTime: 1500,
-    shortRestTime: 300,
-    longRestTime: 900,
-    cycles: 4,
-  });
+  localStorage.setItem(
+    'pomodoroOptions',
+    JSON.stringify(defaultPomodoroOptions),
+  );
+
+  const storedData: PomodoroOptions | null = JSON.parse(
+    localStorage.getItem('pomodoroOptions') ?? 'null',
+  );
+
+  const [pOptions, setPOptions] = useState<PomodoroOptions>(
+    storedData ?? defaultPomodoroOptions,
+  );
 
   const value = {
     pOptions,

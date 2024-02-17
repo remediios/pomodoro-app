@@ -127,7 +127,7 @@ body {
 }
 
 .settings-controls {
-  padding: 20px 0;
+  padding: 20px 0 0;
   display: flex;
   flex-direction: column;
   align-items: start;
