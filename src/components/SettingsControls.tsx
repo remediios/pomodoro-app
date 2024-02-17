@@ -21,7 +21,6 @@ interface Props {
 
 function SettingsControls({ options, setOptions }: Props): JSX.Element {
   const { pOptions } = usePomodoroContext();
-
   const [pomodoroTime, setPomodoroTime] = useState(pOptions.pomodoroTime);
   const [shortRestTime, setShortRestTime] = useState(pOptions.shortRestTime);
   const [longRestTime, setLongRestTime] = useState(pOptions.longRestTime);
@@ -66,6 +65,7 @@ function SettingsControls({ options, setOptions }: Props): JSX.Element {
           value={options.pomodoroTime}
           onChange={(e) => handleInputChange(e)}
         />
+        s
       </div>
       <div className="settings-control">
         <p>Short Rest Time:</p>
@@ -76,6 +76,7 @@ function SettingsControls({ options, setOptions }: Props): JSX.Element {
           value={options.shortRestTime}
           onChange={(e) => handleInputChange(e)}
         />
+        s
       </div>
       <div className="settings-control">
         <p>Long Rest Time:</p>
@@ -86,6 +87,7 @@ function SettingsControls({ options, setOptions }: Props): JSX.Element {
           value={options.longRestTime}
           onChange={(e) => handleInputChange(e)}
         />
+        s
       </div>
       <div className="settings-control">
         <p>Cycles:</p>
